@@ -219,6 +219,10 @@ class Dashboard extends CI_Controller
         $data['unit_type'] = $this->input->get_post('unit_type');
         $data['re_order_level'] = $this->input->get_post('re_order_level');
         $data['status'] = $this->input->get_post('status');
+        $data['max_pct'] = $this->input->get_post('max_pct');
+        $data['cash_pct'] = $this->input->get_post('cash_pct');
+        $data['dealer_pct'] = $this->input->get_post('dealer_pct');
+        $data['itm_price'] = $this->input->get_post('itm_price');
         $data['item_code'] = $this->mmodel->generate_item_number();
         $data['last_modified_at'] = date('Y-m-d H:i:s');
         $data['last_modified_by'] = $this->session->userdata('name');
@@ -339,6 +343,7 @@ class Dashboard extends CI_Controller
         $header['net_total'] = $this->input->post('net_total');
         $header['net_total'] = $this->input->post('net_total');
         $header['net_total'] = $this->input->post('net_total');
+        $header['invoice_type'] = $this->input->post('invoice_type');
         $header['last_modified_at'] = date('Y-m-d H:i:s');
         $header['last_modified_by'] = $this->session->userdata('name');
 

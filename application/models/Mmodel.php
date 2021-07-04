@@ -103,7 +103,9 @@ class MModel extends CI_Model
         $result = $this->db
             ->query("SELECT DISTINCT
                         item_master.item_code, 
-                        item_master.item_name
+                        item_master.item_name,
+                        item_master.max_pct
+                
                     FROM
                         inventory
                         INNER JOIN
@@ -173,6 +175,8 @@ class MModel extends CI_Model
                         im.item_code, 
                         im.item_name, 
                         im.unit_type, 
+                        im.itm_price, 
+                        im.max_pct, 
                         sku.sku_code, 
                         sku.sku_name, 
                         i.selling_price
@@ -332,6 +336,9 @@ class MModel extends CI_Model
                         i.item_name, 
                         i.unit_type, 
                         i.re_order_level, 
+                        i.dealer_pct, 
+                        i.max_pct, 
+                        i.cash_pct, 
                         sku.sku_code, 
                         sku.sku_name, 
                         s.supplier_code, 

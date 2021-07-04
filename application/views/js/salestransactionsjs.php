@@ -60,6 +60,7 @@
                 $item_code: $("#item_code"),
                 $item_qty: $("#item_qty"),
                 $item_discount: $("#item_discount"),
+                $invoiceType: $("#invoice_type"),
                 $table: $("#example1"),
 
                 $invNo: $("#inv_no"),
@@ -135,9 +136,9 @@
                     ++rowCount;
 
                     if (this.$item_qty.val() > 0) {
-                        total = data.selling_price * this.$item_qty.val();
+                        total = data.itm_price * this.$item_qty.val();
                     } else {
-                        total = data.selling_price;
+                        total = data.itm_price;
                     }
                     this.$grossTotal += Number(total);
 
@@ -157,10 +158,11 @@
                         `<td class='item_code'>` + data.item_code + `</td>` +
                         `<td>` + data.item_name + `</td>` +
                         `<td>` + data.sku_name + `</td>` +
-                        `<td class='selling_price'>` + data.selling_price + `</td>` +
+                        `<td class='selling_price'>` + data.itm_price + `</td>` +
                         `<td>` + data.unit_type + `</td>` +
                         `<td class='qty'>` + qty + `</td>` +
                         `<td class='discount_pct'>` + discountPct + `</td>` +
+                        `<td class='max_pct'>` + data.max_pct + `</td>` +
                         `<td class='total_value'>` + totalAfterDiscount + `</td>` +
                         `<td> <button type='button' class = 'btn btn-danger'  onClick='removeRecord("` + rowCount + `")'> <i class='fa fa-trash' aria-hidden='true'></i> </button>` + `</td>` +
                         +`<tr>`
@@ -205,6 +207,7 @@
                             tax_amt: this.$txt_tax_amt.val(),
                             total_discount: this.$txt_total_discount.val(),
                             net_total: this.$txt_net_total.val(),
+                            invoice_type: this.$invoiceType.val(),
                             item_list: JSON.stringify(myTableArray)
                         },
                         function (result) {

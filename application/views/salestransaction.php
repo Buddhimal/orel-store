@@ -100,7 +100,7 @@
                                             <div class="col-md-12">
                                                 <select id="item_code" class="form-control select2bs4">
                                                     <?php foreach ($items->result() as $item) { ?>
-                                                        <option value="<?php echo $item->item_code ?>"><?php echo $item->item_code . '-' . $item->item_name ?>
+                                                        <option value="<?php echo $item->item_code ?>"><?php echo $item->item_code . '-' . $item->item_name . ' (Max: '.$item->max_pct.'%)' ?>
                                                         </option>
                                                     <?php } ?>
                                                 </select>
@@ -145,6 +145,7 @@
                                             <th>Type</th>
                                             <th>Sales Qty</th>
                                             <th>Discount %</th>
+                                            <th>Max %</th>
                                             <th>Total Price (Rs)</th>
                                             <th>Action</th>
                                         </tr>
@@ -161,6 +162,15 @@
                                     <!-- form start -->
                                     <div class="form-horizontal">
                                         <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="inputEmail3" class="col-sm-4 col-form-label">Type</label>
+                                                <div class="col-sm-8">
+                                                    <select id="invoice_type" name="invoice_type" class="form-control">
+                                                        <option value="Invoice">Invoice</option>
+                                                        <option value="Quotation">Quotation</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                             <div class="form-group row">
                                                 <label for="inputEmail3" class="col-sm-4 col-form-label">Gross
                                                     Total</label>
@@ -179,7 +189,7 @@
                                                            value="0" disabled>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class="form-group row" style="display: none">
                                                 <label for="inputPassword3"
                                                        class="col-sm-4 col-form-label">Tax (%)</label>
                                                 <div class="col-sm-8">

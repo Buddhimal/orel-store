@@ -108,10 +108,52 @@
 
                                     <div class="form-group row">
                                         <div class="col-sm-2"></div>
-                                        <label for="lblItemName" class="col-sm-4 col-form-label">Re-Order level</label>
+                                        <label for="lblItemName"  class="col-sm-4 col-form-label">Re-Order level</label>
                                         <div class="col-sm-4">
                                             <input type="number" class="form-control" id="re_order_level"
                                                    placeholder="Re order Level" name="re_order_level" required>
+                                        </div>
+                                        <div class="col-sm-2"></div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-2"></div>
+                                        <label for="itm_price"  class="col-sm-4 col-form-label">MRP</label>
+                                        <div class="col-sm-4">
+                                            <input type="number" step='0.01' class="form-control" id="itm_price"
+                                                   placeholder="MRP" name="itm_price" required>
+                                        </div>
+                                        <div class="col-sm-2"></div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-2"></div>
+                                        <label for="max_pct"  class="col-sm-4 col-form-label">Max %</label>
+                                        <div class="col-sm-4">
+                                            <input type="number" step='0.01' class="form-control" id="max_pct"
+                                                   placeholder="Max %" name="max_pct" required>
+                                        </div>
+                                        <div class="col-sm-2"></div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-2"></div>
+                                        <label for="max_pct"  class="col-sm-4 col-form-label">Cash %</label>
+                                        <div class="col-sm-4">
+                                            <input type="number" step='0.01' class="form-control" id="cash_pct"
+                                                   placeholder="Cash %" name="cash_pct" required>
+                                        </div>
+                                        <div class="col-sm-2"></div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-2"></div>
+                                        <label for="max_pct"  class="col-sm-4 col-form-label">Dealer %</label>
+                                        <div class="col-sm-4">
+                                            <input type="number" step='0.01' class="form-control" id="dealer_pct"
+                                                   placeholder="Dealer %" name="dealer_pct" required>
                                         </div>
                                         <div class="col-sm-2"></div>
                                     </div>
