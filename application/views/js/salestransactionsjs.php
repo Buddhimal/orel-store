@@ -1,4 +1,4 @@
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="<?php echo base_url() ?>plugins/daterangepicker/daterangepicker.js"></script>
 
@@ -21,7 +21,7 @@
 
     function removeRecord(itemCode) {
 
-        let parentId = 'item'+itemCode;
+        let parentId = 'item' + itemCode;
 
         let totalQty = $("#total_qty");
         let grossTotal = $("#gross_total");
@@ -31,22 +31,22 @@
         let netTotal = $('#net_total');
 
 
-        discountTotal.val(discountTotal.val() - (( $('#'+parentId+'> .selling_price').html() ) * ( $('#'+parentId+'> .qty').html() ) * ( $('#'+parentId+'> .discount_pct').html() )/100) )
+        discountTotal.val(discountTotal.val() - (($('#' + parentId + '> .selling_price').html()) * ($('#' + parentId + '> .qty').html()) * ($('#' + parentId + '> .discount_pct').html()) / 100))
 
 
-        totalQty.val(totalQty.val() - $('#'+parentId+'> .qty').html());
+        totalQty.val(totalQty.val() - $('#' + parentId + '> .qty').html());
         // discountTotal.val(discountTotal.val() - (( $('#'+parentId+'> .selling_price').html() ) * ( $('#'+parentId+'> .discount_pct').html() )/100) )
-        grossTotal.val(grossTotal.val() - ( $('#'+parentId+'> .selling_price').html() * $('#'+parentId+'> .qty').html()));
-        netTotal.val(netTotal.val() - ( $('#'+parentId+'> .total_value').html() ));
+        grossTotal.val(grossTotal.val() - ($('#' + parentId + '> .selling_price').html() * $('#' + parentId + '> .qty').html()));
+        netTotal.val(netTotal.val() - ($('#' + parentId + '> .total_value').html()));
 
         $('#item' + itemCode).remove();
 
     }
 
 
-    (function($) {
+    (function ($) {
         "use strict";
-        $(function() {
+        $(function () {
 
             const salesTransObj = {
                 $btnAdd: $("#btn_add"),
@@ -87,7 +87,7 @@
                     this.$btnSaveTans.on("click", function (e) {
                         e.preventDefault();
 
-                        if ($('#example1 tbody tr').length > 0){
+                        if ($('#example1 tbody tr').length > 0) {
                             Swal.fire({
                                 title: 'Are you sure?',
                                 icon: 'warning',
@@ -157,9 +157,9 @@
                         `<tr class='data_row' id='item` + rowCount + `' >` +
                         `<td class='item_code'>` + data.item_code + `</td>` +
                         `<td>` + data.item_name + `</td>` +
-                        `<td>` + data.sku_name + `</td>` +
+                        `<td style="display: none;">` + data.sku_name + `</td>` +
                         `<td class='selling_price'>` + data.itm_price + `</td>` +
-                        `<td>` + data.unit_type + `</td>` +
+                        `<td style="display: none">` + data.unit_type + `</td>` +
                         `<td class='qty'>` + qty + `</td>` +
                         `<td class='discount_pct'>` + discountPct + `</td>` +
                         `<td class='max_pct'>` + data.max_pct + `</td>` +
@@ -169,8 +169,8 @@
                     )
 
                     // this.$txt_gross_total.val(this.$grossTotal);
-                    this.$txt_gross_total.val( Number(this.$txt_gross_total.val()) + Number(total));
-                    this.$txt_total_qty.val( Number(this.$txt_total_qty.val()) + Number(qty));
+                    this.$txt_gross_total.val(Number(this.$txt_gross_total.val()) + Number(total));
+                    this.$txt_total_qty.val(Number(this.$txt_total_qty.val()) + Number(qty));
                     // this.$txt_total_qty.val(this.$qtyTotal);
                     // this.$txt_total_discount.val(this.$discountTotal);
                     this.$txt_total_discount.val(Number(this.$txt_total_discount.val()) + Number(discount));
@@ -181,9 +181,9 @@
                     this.$item_qty.val('');
                     this.$item_discount.val('');
                 },
-                saveTranRecords: function() {
+                saveTranRecords: function () {
 
-                    $('#example1 tbody tr').each(function() {
+                    $('#example1 tbody tr').each(function () {
                         var arrayOfThisRow = [];
 
                         arrayOfThisRow[0] = $(this).find(".item_code").html();
@@ -195,7 +195,7 @@
                     });
 
                     $.post(
-                        baseUrl+"save_transaction",
+                        baseUrl + "save_transaction",
                         {
                             invoice_number: this.$invNo.val(),
                             inv_date: this.$invDate.val(),
@@ -214,14 +214,14 @@
 
                             var res = $.parseJSON(result);
 
-                            if(res.status==1){
+                            if (res.status == 1) {
                                 Swal.fire({
                                     title: 'Transaction added Successfully...',
                                     confirmButtonText: `OK`,
-                                    icon:'success'
+                                    icon: 'success'
                                 }).then((result) => {
                                     if (result.isConfirmed) {
-                                        window.location.href = "<?php echo base_url()?>invoice?id="+res.trans_id;
+                                        window.location.href = "<?php echo base_url()?>invoice?id=" + res.trans_id;
                                     }
                                 })
                             }

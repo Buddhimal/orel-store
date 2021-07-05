@@ -17,8 +17,8 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="<?php echo base_url() ?>plugins/jquery-ui/jquery-ui.min.js"></script>
-<script src="<?php echo base_url()?>plugins/jquery/jquery.min.js"></script>
+<!--<script src="--><?php //echo base_url() ?><!--plugins/jquery-ui/jquery-ui.min.js"></script>-->
+<!--<script src="--><?php //echo base_url()?><!--plugins/jquery/jquery.min.js"></script>-->
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url()?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
@@ -46,4 +46,5 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!--<script src="--><?php //echo base_url() ?><!--dist/js/pages/dashboard.js"></script>-->
 </body>
+
 </html>

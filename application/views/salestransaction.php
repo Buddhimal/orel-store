@@ -100,7 +100,7 @@
                                             <div class="col-md-12">
                                                 <select id="item_code" class="form-control select2bs4">
                                                     <?php foreach ($items->result() as $item) { ?>
-                                                        <option value="<?php echo $item->item_code ?>"><?php echo $item->item_code . '-' . $item->item_name . ' (Max: '.$item->max_pct.'%)' ?>
+                                                        <option value="<?php echo $item->item_code ?>"><?php echo $item->item_code . '-' . $item->item_name . ' (Max: ' . $item->max_pct . '%)' ?>
                                                         </option>
                                                     <?php } ?>
                                                 </select>
@@ -140,9 +140,9 @@
                                         <tr>
                                             <th>Item Code</th>
                                             <th>Item Name</th>
-                                            <th>Item Group</th>
+                                            <th style="display:none;">Item Group</th>
                                             <th>Unit Price (Rs)</th>
-                                            <th>Type</th>
+                                            <th style="display:none;">Type</th>
                                             <th>Sales Qty</th>
                                             <th>Discount %</th>
                                             <th>Max %</th>
@@ -217,8 +217,11 @@
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer">
-                                            <button type="submit" id="btn_save_tans" class="btn btn-info full-width">Save</button>
-                                            <a href="<?php echo base_url()?>dashboard" type="button" class="btn btn-default float-right">Cancel</a>
+                                            <button type="submit" id="btn_save_tans" class="btn btn-info full-width">
+                                                Save
+                                            </button>
+                                            <a href="<?php echo base_url() ?>dashboard" type="button"
+                                               class="btn btn-default float-right">Cancel</a>
                                         </div>
                                         <!-- /.card-footer -->
                                     </div>
@@ -232,6 +235,14 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        $('.select2bs4').select2();
+    });
+</script>
 
-
-
+<style>
+    .select2-selection--single{
+        height: 40px !important;
+    }
+</style>
