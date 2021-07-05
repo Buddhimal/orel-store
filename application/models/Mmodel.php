@@ -105,13 +105,9 @@ class MModel extends CI_Model
                         item_master.item_code, 
                         item_master.item_name,
                         item_master.max_pct
-                
                     FROM
-                        inventory
-                        INNER JOIN
                         item_master
-                        ON 
-                            inventory.item_id = item_master.id");
+                       ");
 
         return $result;
     }
