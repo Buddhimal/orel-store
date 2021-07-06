@@ -177,7 +177,7 @@ class MModel extends CI_Model
                         '' as sku_name, 
                         0 as selling_price
                     FROM
-                        item_master
+                        item_master im
                     WHERE im.item_code='$item_code'
         ");
     }
