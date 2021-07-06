@@ -173,20 +173,11 @@ class MModel extends CI_Model
                         im.unit_type, 
                         im.itm_price, 
                         im.max_pct, 
-                        sku.sku_code, 
-                        sku.sku_name, 
-                        i.selling_price
+                        '' as sku_code, 
+                        '' as sku_name, 
+                        0 as selling_price
                     FROM
-                        item_master AS im
-                        INNER JOIN
-                        item_sku AS sku
-                        ON 
-                            im.item_sku_id = sku.id
-                        INNER JOIN
-                        inventory AS i
-                        ON 
-                            im.id = i.item_id AND
-                            sku.id = i.item_sku_id
+                        item_master
                     WHERE im.item_code='$item_code'
         ");
     }
