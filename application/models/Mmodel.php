@@ -74,8 +74,8 @@ class MModel extends CI_Model
                 il.unit_price, 
                 im.unit_type, 
                 im.item_name, 
-                sku.sku_code, 
-                sku.sku_name, 
+                '' as sku_code, 
+                '' as sku_name, 
                 il.discount,
                 il.qty,
                 il.total_price
@@ -89,10 +89,6 @@ class MModel extends CI_Model
                 item_master AS im
                 ON 
                     il.item_code = im.item_code
-                INNER JOIN
-                item_sku AS sku
-                ON 
-                    im.item_sku_id = sku.id
                 WHERE ih.id=$id"
         );
         return $result;
