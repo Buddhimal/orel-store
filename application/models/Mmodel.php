@@ -149,9 +149,9 @@ class MModel extends CI_Model
                                         INNER JOIN item_sku AS sku ON inv.item_sku_id = sku.id 
                                         AND im.item_sku_id = sku.id ";
 
-        if (($param_data['from'] !=''))
+        if (($param_data['from'] != ''))
             $query .= " AND inv.date_purchased >= '$from'";
-        if (($param_data['to'] !=''))
+        if (($param_data['to'] != ''))
             $query .= " AND inv.date_purchased <= '$to'";
         if (isset($type) && $type == 'price')
             $query .= " AND inv.selling_price LIKE '%$param2%'";
@@ -315,7 +315,8 @@ class MModel extends CI_Model
         return $result;
     }
 
-    public function get_items($item_code=''){
+    public function get_items($item_code = '')
+    {
 
         return $this->db
             ->query("SELECT
@@ -326,26 +327,19 @@ class MModel extends CI_Model
                         i.dealer_pct, 
                         i.max_pct, 
                         i.cash_pct, 
-                        sku.sku_code, 
-                        sku.sku_name, 
-                        s.supplier_code, 
-                        s.supplier_name, 
+                        '' as sku_code, 
+                        '' as sku_name, 
+                        '' as supplier_code, 
+                        '' as supplier_name, 
                         i.`status`
                     FROM
                         item_master AS i
-                        INNER JOIN
-                        item_sku AS sku
-                        ON 
-                            i.item_sku_id = sku.id
-                        INNER JOIN
-                        suppliers AS s
-                        ON 
-                            i.supplier_id = s.id
                     WHERE i.item_code LIKE '%$item_code%'        
                             ");
     }
 
-    public function get_item_sales_history(){
+    public function get_item_sales_history()
+    {
         return $this->db->query("
                                     SELECT
                                         im.id, 
@@ -378,7 +372,8 @@ class MModel extends CI_Model
         ");
     }
 
-    public function get_inventory_report(){
+    public function get_inventory_report()
+    {
 
         return $this->db->query(
             "SELECT
@@ -414,13 +409,14 @@ class MModel extends CI_Model
         );
     }
 
-    public function get_items_for_chart(){
+    public function get_items_for_chart()
+    {
 
         $item_names = [];
         $item_sales = [];
 
         $res = $this->db->query(
-                            "SELECT 
+            "SELECT 
                                 im.item_code,
                                 im.item_name,
                                 SUM( il.qty ) AS qty 
@@ -434,7 +430,7 @@ class MModel extends CI_Model
                                 SUM( il.qty ) DESC 
                                 LIMIT 7");
 
-        foreach ($res->result() as $items){
+        foreach ($res->result() as $items) {
             $item_names[] = $items->item_code;
             $item_sales[] = $items->qty;
         }
@@ -443,9 +439,10 @@ class MModel extends CI_Model
 
     }
 
-    public function get_sales_history_for_chart(){
+    public function get_sales_history_for_chart()
+    {
 
-       $res= $this->db->query("
+        $res = $this->db->query("
         SELECT
             ( SELECT IFNULL( SUM( ih.net_total ), 0 ) FROM invoice_header AS ih WHERE MONTH ( ih.invoice_date )= 1 ) AS m1,
             ( SELECT IFNULL( SUM( ih.net_total ), 0 ) FROM invoice_header AS ih WHERE MONTH ( ih.invoice_date )= 2 ) AS m2,
@@ -467,27 +464,54 @@ class MModel extends CI_Model
         return $data;
     }
 
-    public function get_data_for_dashboard(){
+    public function get_data_for_dashboard()
+    {
 
         $res = $this->db->query("
-        SELECT IFNULL( SUM( ih.net_total ), 0 ) as sales FROM invoice_header AS ih WHERE MONTH ( ih.invoice_date )= 5
+        SELECT IFNULL( SUM( ih.net_total ), 0 ) as sales FROM invoice_header AS ih WHERE  invoice_type = 'Invoice'
         ");
 
         $data['total_sales'] = $res->row()->sales;
 
         $res = $this->db->query("
-            SELECT COUNT(*) as total_items FROM item_master WHERE MONTH(last_modified_at) =5 and status=1
+            SELECT COUNT(*) as total_items FROM item_master WHERE status=1
         ");
 
         $data['total_items'] = $res->row()->total_items;
 
         $res = $this->db->query("
-            SELECT COUNT(*) as invoices FROM invoice_header WHERE MONTH(last_modified_at) =5 
+            SELECT COUNT(*) as invoices FROM invoice_header WHERE  invoice_type = 'Invoice'
         ");
 
         $data['total_invoices'] = $res->row()->invoices;
 
+        $res = $this->db->query("
+            SELECT COUNT(*) as invoices FROM invoice_header WHERE  invoice_type = 'Quotation'
+        ");
+
+        $data['total_quotation'] = $res->row()->invoices;
+
         return $data;
+    }
+
+    public function get_invoice_list($param_data)
+    {
+        $from = $param_data["from"];
+        $to = $param_data["to"];
+
+        $query = "SELECT
+        invoice_header.*
+    FROM
+        invoice_header
+    WHERE 1=1";
+
+        if (isset($param_data['from']) && $from != '')
+            $query .= " AND invoice_header.invoice_date >= '$from'";
+        if (isset($param_data['to']) && $to != '')
+            $query .= " AND invoice_header.invoice_date <= '$to'";
+
+        $result = $this->db->query($query);
+        return $result;
     }
 
 }

@@ -70,6 +70,7 @@ $route['add_sku'] = 'dashboard/add_sku';
 $route['save_sku'] = 'dashboard/save_sku';
 $route['view_sku'] = 'dashboard/view_sku';
 $route['save_item_inventory'] = 'dashboard/save_item_inventory';
+$route['invoice_list'] = 'dashboard/invoice_list';
 
 
 //ajax routes

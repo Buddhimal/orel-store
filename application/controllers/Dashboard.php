@@ -213,17 +213,12 @@ class Dashboard extends CI_Controller
 
     public function save_item($msg = "", $alert_type = "alert-success"){
 
+        $data['item_code'] = $this->input->get_post('item_code');
         $data['item_name'] = $this->input->get_post('name');
-        $data['item_sku_id'] = $this->input->get_post('sku');
-        $data['supplier_id'] = $this->input->get_post('supplier');
-        $data['unit_type'] = $this->input->get_post('unit_type');
-        $data['re_order_level'] = $this->input->get_post('re_order_level');
-        $data['status'] = $this->input->get_post('status');
         $data['max_pct'] = $this->input->get_post('max_pct');
         $data['cash_pct'] = $this->input->get_post('cash_pct');
         $data['dealer_pct'] = $this->input->get_post('dealer_pct');
         $data['itm_price'] = $this->input->get_post('itm_price');
-        $data['item_code'] = $this->mmodel->generate_item_number();
         $data['last_modified_at'] = date('Y-m-d H:i:s');
         $data['last_modified_by'] = $this->session->userdata('name');
 
@@ -232,32 +227,6 @@ class Dashboard extends CI_Controller
         } else {
             $this->item_create('Item failed to Insert', 'alert-danger');
         }
-    }
-
-    public function invoicelist()
-    {
-        $object['controller'] = $this;
-        $object['active_tab'] = "InvoiceList";
-        $object['title'] = "Invoice List";
-        $this->load->view('header', $object);
-        $this->load->view('top_header');
-        $this->load->view('side_menu');
-        $this->load->view('invoicelist');
-        $this->load->view('footer');
-        $this->load->view('js/invoicelistjs');
-    }
-
-    public function invoiceModal()
-    {
-        $object['controller'] = $this;
-        //$object['active_tab'] = "InvoiceList";
-        $object['title'] = "Invoice Modal";
-        $this->load->view('header', $object);
-        //$this->load->view('top_header');
-        //$this->load->view('side_menu');
-        $this->load->view('myModal');
-        $this->load->view('footer');
-        $this->load->view('js/invoicelistjs');
     }
 
     public function itemsaleshistory()
@@ -326,6 +295,24 @@ class Dashboard extends CI_Controller
         $this->load->view('inventoryreport',$data);
         $this->load->view('footer');
         $this->load->view('js/inventoryreportjs');
+    }
+
+    public function invoice_list(){
+        $object['controller'] = $this;
+        $object['active_tab'] = "Invoice";
+        $object['title'] = "Invoice";
+        $this->load->view('header', $object);
+        $this->load->view('top_header');
+        $this->load->view('side_menu');
+
+        $param_data["from"] = $this->input->get('from');
+        $param_data["to"] = $this->input->get('to');
+
+        $data["invoice_data"] = $this->mmodel->get_invoice_list($param_data);
+
+        $this->load->view('invoicelist',$data);
+        $this->load->view('footer');
+        $this->load->view('js/invoicelistjs');
     }
 
 

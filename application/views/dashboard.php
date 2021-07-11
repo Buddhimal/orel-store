@@ -66,76 +66,12 @@
                             <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-file"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">Credit Invoices</span>
-                                <span class="info-box-number">0</span>
+                                <span class="info-box-text">Quotations</span>
+                                <span class="info-box-number"><?php echo $sales_data["total_quotation"] ?></span>
                             </div>
 
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card" style="height:50%;">
-                            <div class="card-header border-1">
-                                <h5 class="card-title">Sales Analysis</h5>
-                            </div>
-                            <div class="card-body">
-
-                                <div class="position-relative mb-4">
-                                    <canvas id="salesAnalysisChart" height="200"></canvas>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="card" style="height:50%;">
-                            <div class="card-header border-1">
-                                <h5 class="card-title">Inventory Stock Analysis</h5>
-                            </div>
-                            <div class="card-body">
-
-                                <div class="col-sm-12">
-
-                                    <div class="position-relative mb-4">
-                                        <canvas id="inventoryStockAnalysisChart" height="200"></canvas>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-6">
-
-
-                        <div class="card" style="height:50%;">
-                            <div class="card-header border-1">
-                                <h5 class="card-title">Frequently Purchased Items</h5>
-                            </div>
-                            <div class="card-body">
-
-                                <div class="position-relative mb-4">
-                                    <canvas id="frequentlyPurchasedItemsChart" height="200"></canvas>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card bg-gradient-success">
-                            <div class="card-header border-0">
-
-                                <h3 class="card-title">
-                                    <i class="far fa-calendar-alt"></i>
-                                    Calendar
-                                </h3>
-                            </div>
-                            <div class="card-body pt-0">
-                                <div id="calendar" style="width: 100%"></div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
             </div>

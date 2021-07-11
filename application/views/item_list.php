@@ -79,13 +79,10 @@
                                     <tr>
                                         <th>Item Code</th>
                                         <th>Item Name</th>
-                                        <th>Supplier</th>
-                                        <th>SKU Code</th>
                                         <th>Max Pct</th>
                                         <th>Cash pct</th>
                                         <th>Dealer Pct</th>
                                         <th>Status</th>
-<!--                                        <th>Action</th>-->
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -93,13 +90,10 @@
                                         <tr>
                                             <td><?php echo $item->item_code ?></td>
                                             <td><?php echo $item->item_name ?></td>
-                                            <td><?php echo $item->supplier_name ?></td>
-                                            <td><?php echo $item->sku_name ?></td>
                                             <td><?php echo $item->max_pct ?></td>
                                             <td><?php echo $item->cash_pct ?></td>
                                             <td><?php echo $item->dealer_pct ?></td>
                                             <td> <span class="right badge <?php echo $item->status ? "badge-success" :"badge-danger" ?>"><?php echo $item->status ? "Active" :"In-active" ?></span> </td>
-<!--                                            <td><span class="fa fa-pen" onclick="alert();"></span></td>-->
                                         </tr>
 
                                     <?php } ?>
@@ -108,10 +102,10 @@
                                     <tr>
                                         <th>Item Code</th>
                                         <th>Item Name</th>
-                                        <th>Supplier</th>
-                                        <th>SKU Code</th>
+                                        <th>Max Pct</th>
+                                        <th>Cash pct</th>
+                                        <th>Dealer Pct</th>
                                         <th>Status</th>
-                                        <th>Action</th>
                                     </tr>
                                     </tfoot>
                                 </table>

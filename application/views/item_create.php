@@ -54,64 +54,20 @@
 
                                     <div class="form-group row">
                                         <div class="col-sm-2"></div>
+                                        <label for="lblItemName" class="col-sm-4 col-form-label">Item Code</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="item_code"
+                                                   placeholder="Item Code" name="item_code" required>
+                                        </div>
+                                        <div class="col-sm-2"></div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-2"></div>
                                         <label for="lblItemName" class="col-sm-4 col-form-label">Item Name</label>
                                         <div class="col-sm-4">
                                             <input type="text" class="form-control" id="name"
                                                    placeholder="Item Name" name="name" required>
-                                        </div>
-                                        <div class="col-sm-2"></div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <div class="col-sm-2"></div>
-                                        <label for="lblskucode" class="col-sm-4 col-form-label">SKU Code</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" id="sku" name="sku">
-                                                <?php foreach ($skus->result() as $skus) { ?>
-                                                    <option value="<?php echo $skus->id ?>"><?php echo $skus->sku_code . '-' . $skus->sku_name ?>
-                                                    </option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-2"></div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <div class="col-sm-2"></div>
-                                        <label for="lblsuppliercode" class="col-sm-4 col-form-label">Supplier
-                                            Code</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" id="supplier" name="supplier">
-                                                <?php foreach ($suppliers->result() as $supplier) { ?>
-                                                    <option value="<?php echo $supplier->id ?>"><?php echo $supplier->supplier_code.'-'.$supplier->supplier_name ?>
-                                                    </option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-2"></div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <div class="col-sm-2"></div>
-                                        <label for="lblunittype" class="col-sm-4 col-form-label">Unit Type</label>
-                                        <div class="col-sm-4">
-                                            <select class="form-control" id="unit_type" name="unit_type">
-                                                <?php foreach ($unit_types->result() as $unit) { ?>
-                                                    <option value="<?php echo $unit->type ?>"><?php echo $unit->type ?>
-                                                    </option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-2"></div>
-                                    </div>
-
-
-                                    <div class="form-group row">
-                                        <div class="col-sm-2"></div>
-                                        <label for="lblItemName"  class="col-sm-4 col-form-label">Re-Order level</label>
-                                        <div class="col-sm-4">
-                                            <input type="number" class="form-control" id="re_order_level"
-                                                   placeholder="Re order Level" name="re_order_level" required>
                                         </div>
                                         <div class="col-sm-2"></div>
                                     </div>
