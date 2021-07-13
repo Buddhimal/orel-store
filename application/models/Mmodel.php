@@ -100,7 +100,11 @@ class MModel extends CI_Model
             ->query("SELECT DISTINCT
                         item_master.item_code, 
                         item_master.item_name,
-                        item_master.max_pct
+                        item_master.max_pct,
+                        item_master.max_price,
+                        item_master.Deprice,
+                        item_master.dealer_pct
+                
                     FROM
                         item_master
                        ");
@@ -253,49 +257,34 @@ class MModel extends CI_Model
 
         $from = $param_data["from"];
         $to = $param_data["to"];
-        //$type = $param_data["search_by"];
-        // $type = $param_data["item_code"];
         $param = $param_data["item_code"];
 
         $query = "SELECT
-        item_master.item_code, 
-        item_master.item_name, 
-        item_sku.sku_name, 
-        invoice_header.customer_name, 
-        invoice_header.invoice_date, 
-        invoice_lines.unit_price, 
-        invoice_lines.qty, 
-        item_master.unit_type, 
-        invoice_lines.total_price, 
-        invoice_lines.discount
-    FROM
-        invoice_header
-        INNER JOIN
-        invoice_lines
-        ON 
-            invoice_header.id = invoice_lines.invoice_id
-        INNER JOIN
-        item_master
-        ON 
-            invoice_lines.item_code = item_master.item_code
-        INNER JOIN
-        item_sku
-        ON 
-            item_master.item_sku_id = item_sku.id AND
-            item_master.item_sku_id = item_sku.id";
+                        item_master.item_code,
+                        item_master.item_name,
+                        invoice_lines.unit_price,
+                        SUM( invoice_lines.qty ) AS qty,
+                        SUM( invoice_lines.total_price ) AS total_price 
+                    FROM
+                        invoice_header
+                        INNER JOIN invoice_lines ON invoice_header.id = invoice_lines.invoice_id
+                        INNER JOIN item_master ON invoice_lines.item_code = item_master.item_code
+
+                    WHERE 1=1";
 
         if (isset($param_data['from']) && $from != '')
             $query .= " AND invoice_header.invoice_date >= '$from'";
         if (isset($param_data['to']) && $to != '')
             $query .= " AND invoice_header.invoice_date <= '$to'";
         if (isset($param_data["item_code"]))
-            $query .= " AND item_master.item_code = '$param' ";
+            $query .= " AND item_master.item_code LIKE '%$param%' ";
 
-        // die($query);
-
+        $query .= " GROUP BY
+                        item_master.item_code,
+                        item_master.item_name,
+                        invoice_lines.unit_price";
 
         $result = $this->db->query($query);
-        // var_dump($result->result());
         return $result;
     }
 
@@ -307,27 +296,14 @@ class MModel extends CI_Model
         item_master";
 
         $result = $this->db->query($query);
-        // var_dump($result->result());
         return $result;
     }
 
     public function get_items($item_code = '')
     {
-
         return $this->db
             ->query("SELECT
-                        i.item_code, 
-                        i.item_name, 
-                        i.unit_type, 
-                        i.re_order_level, 
-                        i.dealer_pct, 
-                        i.max_pct, 
-                        i.cash_pct, 
-                        '' as sku_code, 
-                        '' as sku_name, 
-                        '' as supplier_code, 
-                        '' as supplier_name, 
-                        i.`status`
+                        *
                     FROM
                         item_master AS i
                     WHERE i.item_code LIKE '%$item_code%'        

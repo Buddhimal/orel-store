@@ -78,9 +78,7 @@ $header = $customer_details->row();
                                     <tr>
                                         <th>Item Code</th>
                                         <th>Item Name</th>
-                                        <th>Item Group</th>
                                         <th>Unit Price Rs.</th>
-                                        <th>Qty Type</th>
                                         <th>Qty</th>
                                         <th>Discount</th>
                                         <th>Sub Total (Rs.)</th>
@@ -91,11 +89,9 @@ $header = $customer_details->row();
                                         <tr>
                                             <td><?php echo $line->item_code?></td>
                                             <td><?php echo $line->item_name?></td>
-                                            <td><?php echo $line->sku_name?></td>
                                             <td><?php echo number_format($line->unit_price,2,'.',',')?></td>
-                                            <td><?php echo $line->unit_type?></td>
                                             <td><?php echo $line->qty?></td>
-                                            <td><?php echo $line->discount?>%</td>
+                                            <td><?php echo number_format((($line->unit_price*$line->qty) * ($line->discount)/100),2,'.',',')?></td>
                                             <td><?php echo number_format($line->total_price,2,'.',',')?></td>
                                         </tr>
 

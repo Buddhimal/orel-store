@@ -191,6 +191,7 @@ class Dashboard extends CI_Controller
         $this->load->view('usercash_invoice', $data);
         $this->load->view('footer');
     }
+
     public function item_create($msg = "", $alert_type = "alert-success")
     {
         $object['controller'] = $this;
@@ -244,7 +245,7 @@ class Dashboard extends CI_Controller
         $param_data["param"] = $this->input->get('param');
 
         $data["sales_history_table"] = $this->mmodel->get_salesHistory_table($param_data);
-        $data["item_codes"] = $this->mmodel->get_item_codes();
+        $data["item_codes"] = $this->mmodel->get_item_list();
         $this->load->view('itemsaleshistory', $data);
         $this->load->view('footer');
         $this->load->view('js/itemsaleshistoryjs');

@@ -100,7 +100,7 @@
                                             <div class="col-md-12">
                                                 <select id="item_code" class="form-control select2bs4">
                                                     <?php foreach ($items->result() as $item) { ?>
-                                                        <option value="<?php echo $item->item_code ?>"><?php echo $item->item_code . '-' . $item->item_name . ' (Max: ' . $item->max_pct . '%)' ?>
+                                                        <option value="<?php echo $item->item_code ?>"><?php echo $item->item_code . '-' . $item->item_name . ' (Max: '.$item->max_price.',  Max%: ' . $item->max_pct . '%, Dealer: '.$item->Deprice.', Dealer%: '.$item->dealer_pct.')' ?>
                                                         </option>
                                                     <?php } ?>
                                                 </select>

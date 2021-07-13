@@ -20,105 +20,74 @@
         </div>
         <!-- /.content -->
 
-
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-
-                    <form action="" method="GET" class="form-horizontal">
-                        <div class="row mb-2" style="flex:auto;">
-                            <div id="block1" class="form-group col-sm-0.5" style="flex:auto;">
-
-                            </div>
-                            <div id="block1" class="form-group col-sm-1.5">
-                                Date Range
-                            </div>
-
-                            <div class="col-sm-4">
-                                <div class="input-group">
-                                    <!-- <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="far fa-calendar-alt"></i>
-                                        </span>
-                                    </div> -->
-                                    <input type="date" name="from" class="form-control float-right" value="<?php echo isset($_GET['from']) ? $_GET['from'] : "" ?>">
-                                    <input type="date" name="to" class="form-control float-right" value="<?php echo isset($_GET['to']) ? $_GET['to'] : "" ?>">
+                    <div class="col-12">
+                        <form action="" method="GET" class="form-horizontal">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-1.5 col-form-label">Date Range</label>
+                                <div class="col-5">
+                                    <div class="input-group">
+                                        <input type="date" name="from" class="form-control float-right"
+                                               value="<?php echo isset($_GET['from']) ? $_GET['from'] : "" ?>">
+                                        <input type="date" name="to" class="form-control float-right"
+                                               value="<?php echo isset($_GET['to']) ? $_GET['to'] : "" ?>">
+                                    </div>
                                 </div>
-
+                                <label for="inputEmail3" class="col-1.5 col-form-label">Item</label>
+                                <div class="form-group col-sm-3">
+                                    <select id="item_code" name="item_code" class="form-control select2bs4">
+                                        <option value="">All</option>
+                                        <?php foreach ($item_codes->result() as $item) { ?>
+                                            <option value="<?php echo $item->item_code ?>"
+                                                <?php if (isset($_GET['item_code']) && $_GET['item_code'] == $item->item_code) echo "selected" ?> >
+                                                <?php echo $item->item_code . '-' . $item->item_name ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-1">
+                                    <button id="btnSearch" type="submit" class="btn btn-primary bg-gradient-primary">
+                                        Search
+                                    </button>
+                                </div>
+                                <div class="form-group col-sm-1">
+                                    <a href="<?php echo base_url() ?>dashboard/itemsaleshistory" class="btn btn-info">
+                                        Reset
+                                    </a>
+                                </div>
                             </div>
+                        </form>
+                    </div>
 
-                            <div class="form-group col-sm-1">
-
-                            </div>
-
-                            <div id="block3" class="form-group col-sm-1.5">
-                                Filter by Item code
-                            </div>
-
-                            <div class="form-group col-sm-2">
-                                <select id="searchById" class="form-control select2bs4" name="item_code">
-                                    <option disabled="disabled" selected="selected">Select an item code</option>
-                                    <?php foreach ($item_codes->result() as $item) { ?>
-                                        <option value="<?php echo $item->item_code ?>" <?php if(isset($_GET['item_code']) && $_GET['item_code']==$item->item_code) echo "selected"?>> <?php echo $item->item_code ?> </option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-
-                            <div class="form-group col-sm-0.5">
-
-                            </div>
-                         
-                            
-
-                            <div class="form-group col-sm-1" style="flex:auto;">
-                                <button id="btnSearch" type="submit" class="btn btn-primary bg-gradient-primary">Search</button>
-                            </div>
-                            <div class="form-group" style="flex:auto;">
-
-                            </div>
-                        </div>
-
-                    </form>
-
-                    <div class="card-body" style="background-color:#fff;">
+                    <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
-                                <tr>
-                                    <th>Item Code</th>
-                                    <th>Item Name</th>
-                                    <th>Item Group </th>
-                                    <th>Customer</th>
-                                    <th>Sales Date</th>
-                                    <th>Unit Price (Rs)</th>
-                                    <th>Type</th>
-                                    <th>Sales Qty</th>
-                                    <th>Total Price (Rs)</th>
-                                </tr>
+                            <tr>
+                                <th>Item Code</th>
+                                <th>Item Name</th>
+                                <th>Unit Price (Rs)</th>
+                                <th>Sales Qty</th>
+                                <th>Total Price (Rs)</th>
+                            </tr>
                             </thead>
                             <tbody>
 
-                                <?php foreach ($sales_history_table->result() as $item) { ?>
-                                    <tr>
-                                        <td><?php echo $item->item_code ?></td>
-                                        <td><?php echo $item->item_name ?></td>
-                                        <td><?php echo $item->sku_name ?></td>
-                                        <td><?php echo $item->customer_name ?></td>
-                                        <td><?php echo $item->invoice_date ?></td>
-                                        <td><?php echo $item->unit_price ?></td>
-                                        <td><?php echo $item->unit_type ?></td>
-                                        <td><?php echo $item->qty ?></td>
-                                        <td><?php echo $item->total_price ?></td>
-
-                                        <!-- <td style="text-align: center"><span class="fa fa-pen"></span></td> -->
-                                    </tr>
-                                <?php } ?>
+                            <?php foreach ($sales_history_table->result() as $item) { ?>
+                                <tr>
+                                    <td><?php echo $item->item_code ?></td>
+                                    <td><?php echo $item->item_name ?></td>
+                                    <td><?php echo number_format($item->unit_price, 2, '.', ',') ?></td>
+                                    <td><?php echo number_format($item->qty, 0, '', ',') ?></td>
+                                    <td><?php echo number_format($item->total_price, 2, '.', ',') ?></td>
+                                </tr>
+                            <?php } ?>
 
                             </tbody>
                         </table>
 
                     </div>
                 </div>
-
 
                 <div class="modal fade" id="modal-lg">
                     <div class="modal-dialog modal-lg">
@@ -143,8 +112,19 @@
                 </div>
                 <!-- /.modal -->
 
-
             </div>
         </section>
     </div>
     <!-- /.content-wrapper -->
+
+    <script>
+        $(document).ready(function () {
+            $('.select2bs4').select2();
+        });
+    </script>
+
+    <style>
+        .select2-selection--single {
+            height: 40px !important;
+        }
+    </style>

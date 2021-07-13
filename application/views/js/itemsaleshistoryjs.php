@@ -1,8 +1,8 @@
 
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!--  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
+<!--  <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">-->
+<!--  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+<!--  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
   <script src="<?php echo base_url()?>plugins/daterangepicker/daterangepicker.js"></script>
    <!-- DataTables -->
  <link rel="stylesheet" href="<?php echo base_url()?>plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -22,69 +22,19 @@
 <script src="<?php echo base_url()?>plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="<?php echo base_url()?>plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?php echo base_url()?>plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
 <script>
-    $('#reservation').daterangepicker();
-   
-     var qs = (function(a) {
-    if (a == "") return {};
-    var b = {};
-    for (var i = 0; i < a.length; ++i)
-    {
-        var p=a[i].split('=', 2);
-        if (p.length == 1)
-            b[p[0]] = "";
-        else
-            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-    }
-    return b;
-})(window.location.search.substr(1).split('&'));
-$(document).ready(function(){
 
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,"paging": true,
-      "searching": false,
-      "ordering": false,
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-});
-function openInvoiceModal(e){
-    $('.modal-body').load('./invoiceModal?inv='+e.id.split('_')[1],function(){
-        $('#modal-lg').modal({show:true});
-    });
-}
-function closeModal(){debugger;
-    $('#example1').DataTable().ajax.reload();
-}
+    $(document).ready(function () {
 
-
-function getParameterByName(name) {
-    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.href);
-    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-}
-
-  $(function () {
-    const params = new URL(window.location.href).searchParams;
-
-    $('#btnSearch').click(function(){
-       
-    });
-    
-    $('#searchById').change(function(){
-        $.ajax({
-            url: "../dummydata/itemcodeslist.json",
-            async: false,
-            success: function (data){
-              //alert($('#txtfromdate').val() +" - "+ $('#txttodate').val());
-              $('#idListId').empty();
-              $.each(data.data, function(idx, item) {
-                $('#idListId').append(new Option(item, idx))
-              });
-
-            }
-        });
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false, "paging": true,
+            "searching": false,
+            "ordering": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 
-    $('#example1_info').css('display','none');
-  });
 </script>
 
   </body>

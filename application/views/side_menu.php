@@ -99,15 +99,15 @@ if (!isset($active_main_tab))
                         </p>
                     </a>
                 </li>
-<!--                <li class="nav-item has-treeview ">-->
-<!--                    <a href="--><?php //echo base_url() ?><!--itemsaleshistory"-->
-<!--                       class="nav-link --><?php //if ($active_tab == 'Itemsaleshistory') echo "active" ?><!--">-->
-<!--                        <i class="nav-icon fa fa-list-alt"></i>-->
-<!--                        <p>-->
-<!--                            Item Sales History-->
-<!--                        </p>-->
-<!--                    </a>-->
-<!--                </li>-->
+                <li class="nav-item has-treeview ">
+                    <a href="<?php echo base_url() ?>itemsaleshistory"
+                       class="nav-link <?php if ($active_tab == 'Itemsaleshistory') echo "active" ?>">
+                        <i class="nav-icon fa fa-list-alt"></i>
+                        <p>
+                            Item Sales History
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item has-treeview ">
                     <a href="<?php echo base_url() ?>dashboard/salestransaction"
                        class="nav-link <?php if ($active_tab == 'Salestransaction') echo "active" ?>">
